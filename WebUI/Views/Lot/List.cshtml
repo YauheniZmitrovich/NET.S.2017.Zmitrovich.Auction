@@ -1,87 +1,18 @@
-﻿@model IEnumerable<Domain.Entities.Lot>
-
+﻿@using WebUI.Html_helpers
+@model WebUI.Models.LotsListViewModel
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Lots";
 }
-
-<h2>List</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ViewCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoldPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UploadDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndOfTranding)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsEnded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BidId)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ViewCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GoldPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UploadDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndOfTranding)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsEnded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BidId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@foreach (var p in Model.Lots)
+{
+    <div class="item">
+        <h3>@p.Title</h3>
+        @p.Description
+        <h4>@p.CurrentPrice.ToString("c")</h4>
+        @p.GoldPrice
+        <h5>@p.ViewCount</h5>
+    </div>
 }
-
-</table>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>

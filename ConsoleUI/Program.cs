@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Concrete;
+using Domain.Concrete.Repositories;
 using Domain.Entities;
 
 namespace ConsoleUI
@@ -15,8 +16,18 @@ namespace ConsoleUI
 
             using (var ctx = new EFDbContext())
             {
+                var rep = new EFLotRepository();
 
-              /  UserRole adm = new UserRole { Name = "administrator" };
+                IEnumerable<Lot> lots = rep.Lots;
+
+                foreach (var l in lots)
+                {
+                    Console.WriteLine(l.Title);
+                }
+
+                Console.ReadKey();
+
+                //  Locality ostr = new Locality() { Name = "Астровля",District = "Лидский район",Region = "Гроднеская область",Type="д."};
 
                 //UserRole mod = new UserRole { Name = "moderator" };
 
@@ -25,8 +36,8 @@ namespace ConsoleUI
                 //UserRole ban = new UserRole { Name = "banned" };
 
 
-               // ctx.UserRoles.Add(adm);
-               // ctx.UserRoles.Add(adm);
+                // ctx.Localities.Add(ostr);
+                // ctx.UserRoles.Add(adm);
                 //ctx.UserRoles.Add(mod);
                 //ctx.UserRoles.Add(cl);
                 //ctx.SaveChanges();

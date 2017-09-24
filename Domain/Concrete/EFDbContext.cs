@@ -39,9 +39,10 @@ namespace Domain.Concrete
         public DbSet<UserRole> UserRoles { get; set; }
 
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)//TODO:
-        //{
-        //    modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
     }
 }
