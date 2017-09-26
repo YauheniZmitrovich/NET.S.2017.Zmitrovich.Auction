@@ -68,9 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\ILotRepository.cs" />
-    <Compile Include="Concrete\CustomDBInitializer.cs" />
+    <Compile Include="Concrete\CustomEFDBInitializer.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\Repositories\EFCategoryRepository.cs" />
     <Compile Include="Concrete\Repositories\EFLotRepository.cs" />
     <Compile Include="Entities\LotEntities\Bid.cs" />
     <Compile Include="Entities\LotEntities\Category.cs" />

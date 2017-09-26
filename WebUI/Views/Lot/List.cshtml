@@ -3,16 +3,13 @@
 @{
     ViewBag.Title = "Lots";
 }
-@foreach (var p in Model.Lots)
+
+@foreach (var p in @Model.Lots)
 {
-    <div class="item">
-        <h3>@p.Title</h3>
-        @p.Description
-        <h4>@p.CurrentPrice.ToString("c")</h4>
-        @p.GoldPrice
-        <h5>@p.ViewCount</h5>
-    </div>
+ @Html.Partial("LotSummary",p)
 }
-<div class="pager">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
+        new { page = x, category = Model.CurrentCategory }))
 </div>

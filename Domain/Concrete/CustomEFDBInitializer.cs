@@ -10,7 +10,7 @@ using Domain.Entities;
 
 namespace Domain.Concrete
 {
-    public class CustomDBInitializer : DropCreateDatabaseIfModelChanges<EFDbContext>
+    public class CustomEFDBInitializer : DropCreateDatabaseIfModelChanges<EFDbContext>
     {
         protected override void Seed(EFDbContext context)
         {
@@ -24,7 +24,7 @@ namespace Domain.Concrete
             UserRole bannedRole = (new UserRole() { Name = "banned" });
 
 
-            IList<UserRole> roles = new List<UserRole>(){ adminRole, userRole, bannedRole };
+            IList<UserRole> roles = new List<UserRole>() { adminRole, userRole, bannedRole };
 
             foreach (UserRole rl in roles)
                 context.UserRoles.Add(rl);
@@ -251,12 +251,15 @@ namespace Domain.Concrete
                     + " as may the concert harp and, for performances of some modern compositions, electronic instruments."
             });
 
-            cgs.Add(new Category()
+
+            Category accessories = new Category()
             {
                 Name = "Accessories",
                 Description =
                     "Accessories for Music Instruments Strings, bows, guitar equipment, music stands, rosin, mouthpiece, violin bridge etc."
-            });
+            };
+
+            cgs.Add(accessories);
 
             #endregion
 
@@ -268,6 +271,9 @@ namespace Domain.Concrete
 
 
             #region Lots
+
+
+            #region Guitars
 
             IList<Lot> lots = new List<Lot>();
 
@@ -283,7 +289,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 12, 18),
                 IsEnded = false,
                 Owner = yarushkin,
-                Categories = { guitars, acousticGuitars }
+                Category = acousticGuitars
             });
 
             lots.Add(new Lot()
@@ -297,7 +303,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 11, 18),
                 IsEnded = false,
                 Owner = axenov,
-                Categories = { guitars, acousticElectricGuitars }
+                Category = acousticElectricGuitars
             });
 
             lots.Add(new Lot()
@@ -311,7 +317,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 11, 25),
                 IsEnded = false,
                 Owner = yarushkin,
-                Categories = { guitars, acousticElectricGuitars }
+                Category = acousticElectricGuitars
             });
 
             lots.Add(new Lot()
@@ -325,7 +331,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 11, 12),
                 IsEnded = false,
                 Owner = axenov,
-                Categories = { guitars, acousticGuitars }
+                Category = acousticGuitars
             });
 
             lots.Add(new Lot()
@@ -339,7 +345,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 10, 12),
                 IsEnded = false,
                 Owner = yarushkin,
-                Categories = { guitars, acousticGuitars }
+                Category = acousticGuitars
             });
 
             lots.Add(new Lot()
@@ -353,7 +359,7 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 12, 12),
                 IsEnded = false,
                 Owner = axenov,
-                Categories = { guitars, acousticGuitars }
+                Category = acousticGuitars
             });
 
             lots.Add(new Lot()
@@ -367,8 +373,143 @@ namespace Domain.Concrete
                 EndOfTranding = new DateTime(2017, 12, 10),
                 IsEnded = false,
                 Owner = yarushkin,
-                Categories = { guitars, acousticGuitars }
+                Category = acousticGuitars
             });
+
+            #endregion
+
+
+            #region Accessories
+
+            lots.Add(new Lot()
+            {
+                Title = "Утеплённый чехол Fender для акустической гитары",
+                Description = "Каподастр и 5 медиаторов в подарок!",
+                ViewCount = 0,
+                CurrentPrice = 50,
+                GoldPrice = 150,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = yarushkin,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Жёсткий кейс Ibanez для акустической гитары",
+                Description = "Спокойные перелёты для вашего инструмента!",
+                ViewCount = 0,
+                CurrentPrice = 100,
+                GoldPrice = 250,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "100 Медиаторов фирмы Alice",
+                Description = "Найди свой среди других!",
+                ViewCount = 0,
+                CurrentPrice = 2,
+                GoldPrice = 10,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = yarushkin,
+                Category = accessories
+            });
+
+
+            lots.Add(new Lot()
+            {
+                Title = "Кожанный ремень фирмы D&R",
+                Description = "Каподастр и слайд в подарок!",
+                ViewCount = 0,
+                CurrentPrice = 25,
+                GoldPrice = 55,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = yarushkin,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Guitar tool от фирмы JP",
+                Description = "Незаменимая вещь для каждого гитариста!",
+                ViewCount = 0,
+                CurrentPrice = 40,
+                GoldPrice = 110,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Dunlop conditioner 02",
+                Description = "Cредство по уходу за грифом акустической гитары.",
+                ViewCount = 0,
+                CurrentPrice = 5,
+                GoldPrice = 10,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Керамический слайд от фирмы Dunlop",
+                Description = "Сочетает в себе лучшие качества стеклянного и металлического слайдов!",
+                ViewCount = 0,
+                CurrentPrice = 20,
+                GoldPrice = 45,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Dunlop cleaner",
+                Description = "Cредство по уходу за грифом акустической гитары.",
+                ViewCount = 0,
+                CurrentPrice = 15,
+                GoldPrice = 30,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            lots.Add(new Lot()
+            {
+                Title = "Струны Elixir 12-52 Nanoweb",
+                Description = "Материалы фосфор и бронза, а также фирменное покрытие от Elixir позволяют звучать вашему инструменту долго и красиво.",
+                ViewCount = 0,
+                CurrentPrice = 15,
+                GoldPrice = 30,
+                UploadDate = DateTime.Now,
+                EndOfTranding = new DateTime(2017, 11, 18),
+                IsEnded = false,
+                Owner = axenov,
+                Category = accessories
+            });
+
+            #endregion
+
 
             foreach (Lot lot in lots)
                 context.Lots.Add(lot);

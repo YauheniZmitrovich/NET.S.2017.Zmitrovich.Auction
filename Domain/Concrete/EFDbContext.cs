@@ -14,7 +14,7 @@ namespace Domain.Concrete
         public EFDbContext() :
             base("Auction")
         {
-            Database.SetInitializer(new CustomDBInitializer());
+            Database.SetInitializer(new CustomEFDBInitializer());
         }
 
 

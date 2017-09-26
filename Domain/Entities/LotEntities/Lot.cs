@@ -14,7 +14,6 @@ namespace Domain.Entities
 
         public Lot()
         {
-            Categories = new HashSet<Category>();
             Photos = new HashSet<Photo>();
             Comments = new HashSet<Comment>();
         }
@@ -63,13 +62,16 @@ namespace Domain.Entities
         public User Owner { get; set; }
 
 
+        public long CategoryId { get; set; }
+
+        public Category Category { get; set; }
+
+
         public virtual ICollection<Bid> Bids { get; set; }
 
         public virtual ICollection<Photo> Photos { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-
-        public virtual ICollection<Category> Categories { get; set; }
 
         #endregion
     }
