@@ -70,10 +70,14 @@
   <ItemGroup>
     <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\ILotRepository.cs" />
+    <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Abstract\IUserRoleRepository.cs" />
     <Compile Include="Concrete\CustomEFDBInitializer.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\Repositories\EFUserRepository.cs" />
     <Compile Include="Concrete\Repositories\EFCategoryRepository.cs" />
     <Compile Include="Concrete\Repositories\EFLotRepository.cs" />
+    <Compile Include="Concrete\Repositories\EFUserRoleRepository.cs" />
     <Compile Include="Entities\LotEntities\Bid.cs" />
     <Compile Include="Entities\LotEntities\Category.cs" />
     <Compile Include="Entities\LotEntities\Comment.cs" />

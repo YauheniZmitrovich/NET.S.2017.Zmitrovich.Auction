@@ -10,6 +10,8 @@ namespace WebUI.Controllers
     {
         public ActionResult Index()
         {
+            RedirectToAction("List", "Lot");
+
             return View();
         }
 

@@ -21,7 +21,7 @@ namespace WebUI.Controllers
         {
             ViewBag.SelectedCategory = category;
 
-            IEnumerable<string> categories = _repository.Categories
+            var categories = _repository.Categories
                 .Where(c => c.SubCategory == null)
                 .OrderBy(c => c.Id)
                 .Select(c => c.Name);

@@ -32,7 +32,12 @@ namespace WebUI.Infrastructure
         private void AddBindings()
         {
             _kernel.Bind<ILotRepository>().To<EFLotRepository>();
+
             _kernel.Bind<ICategoryRepository>().To<EFCategoryRepository>();
+
+            _kernel.Bind<IUserRepository>().To<EFUserRepository>();
+
+            _kernel.Bind<IUserRoleRepository>().To<EFUserRoleRepository>();
         }
     }
 }
