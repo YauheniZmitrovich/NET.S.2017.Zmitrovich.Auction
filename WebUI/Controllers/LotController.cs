@@ -15,7 +15,7 @@ namespace WebUI.Controllers
     {
         private readonly ILotRepository _repository;
 
-        public int PageSize { get; set; } = 4; //TODO:Replace with ajax
+        public int PageSize { get; set; } = 4;
 
         public LotController(ILotRepository lotRepository)
         {
@@ -37,12 +37,24 @@ namespace WebUI.Controllers
                     ItemsPerPage = PageSize,
                     TotalItems = category == null ?
                         _repository.Lots.Count() :
-                        _repository.Lots.Where(lot => lot.Category.Name == category).Count()
+                        _repository.Lots.Count(lot => lot.Category.Name == category)
                 },
                 CurrentCategory = category
             };
 
             return View(model);
+        }
+
+        public FileResult GetImage(int id)
+        {
+            var photo = _repository.Lots.FirstOrDefault(p => p.Id == id)?.Photos.FirstOrDefault();
+
+            if(photo!=null)
+                return File(photo.Content, "image/png");
+
+            var path = Server.MapPath("~/Content/DefaultImages/Lot.png");
+
+            return File(path, "image/png");
         }
     }
 }

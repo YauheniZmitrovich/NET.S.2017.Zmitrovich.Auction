@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Html helpers\LotPagingHelper.cs" />
     <Compile Include="Infrastructure\CaptchaImage.cs" />
+    <Compile Include="Infrastructure\DataRepresentative.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\LotPageInfo.cs" />
