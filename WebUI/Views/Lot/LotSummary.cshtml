@@ -1,19 +1,24 @@
 ﻿@using WebUI.Infrastructure
 @model Domain.Entities.Lot
 
-<div class="well">
+<div class="lotProfileRef">
+    <a href="@Url.Action("Profile", "Lot",new {Model.Id})">
+        <div class="well">
 
-    <div style="float: left; margin-right: 20px">
-        <img width="100" height=100 src="@Url.Action("GetImage", "Lot", new {Model.Id})" />
-    </div>
+            <div style="float: left; margin-right: 20px">
+                <img width="100" height=100 src="@Url.Action("GetImage", "Lot", new {Model.Id})" />
+            </div>
 
-    <h3>
-        <strong>@DataRepresentative.HandleLotTitleForSummary(Model.Title)</strong>
-        <span class="pull-right label label-primary">@Model.CurrentPrice.ToString("c")</span>
-    </h3>
+            <h3>
+                <strong>@DataRepresentative.HandleLotTitleForSummary(Model.Title)</strong>
+                <span class="pull-right label label-primary">@Model.CurrentPrice.ToString("c")</span>
+            </h3>
 
-    <h3>
-        <span class="pull-right label label-default">@Model.GoldPrice.Value.ToString("c")</span>@*TODO:if NULL*@
-    </h3>
-    <span class="lead">@DataRepresentative.HandleLotDescriptionForSummary(Model.Description)</span>
+            <h3>
+                <span class="pull-right label label-default">@Model.GoldPrice.Value.ToString("c")</span>@*TODO:if NULL*@
+            </h3>
+            <span class="lead">@DataRepresentative.HandleLotDescriptionForSummary(Model.Description)</span>
+        
+        </div>
+    </a>
 </div>

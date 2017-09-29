@@ -1,4 +1,4 @@
-/* NUGET: BEGIN LICENSE TEXT
+﻿/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
  * purpose of either: (i) interacting through your browser with the Microsoft
@@ -298,12 +298,12 @@ input, button, select, textarea {
     button, input, select[multiple], textarea {
         background-image: none
     }
-element{
 
+element {
     border-left-width: 225px;
     border-left-style: solid;
-
 }
+
 a {
     color: #428bca;
     text-decoration: none
@@ -319,6 +319,12 @@ a {
         outline: 5px auto -webkit-focus-ring-color;
         outline-offset: -2px
     }
+
+
+.lotProfileRef a {
+    color: #333;
+}
+
 
 img {
     vertical-align: middle
@@ -1989,7 +1995,7 @@ textarea.input-lg {
 
     .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
         color: #fff;
-     background-color: #20a42b;
+        background-color: #20a42b;
         border-color: #398439
     }
 
