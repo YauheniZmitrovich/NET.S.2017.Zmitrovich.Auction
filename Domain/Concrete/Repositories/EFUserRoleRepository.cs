@@ -19,9 +19,6 @@ namespace Domain.Concrete.Repositories
 
         public bool Create(UserRole ur)
         {
-            if (ur.Id != 0)
-                return false;
-
             _context.UserRoles.Add(ur);
 
             _context.SaveChanges();

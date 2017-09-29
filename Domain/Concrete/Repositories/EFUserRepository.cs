@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Domain.Abstract;
 using Domain.Entities;
@@ -15,9 +16,6 @@ namespace Domain.Concrete.Repositories
 
         public bool Create(User user)
         {
-            if (user.Id != 0)
-                return false;
-
             _context.Users.Add(user);
 
             _context.SaveChanges();

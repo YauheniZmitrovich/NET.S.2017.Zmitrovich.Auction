@@ -6,19 +6,20 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <title>@ViewBag.Title TastyPrice </title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
-<div class="navbar navbar-inverse" role="navigation">
-    <a class="navbar-brand" href="#"> TastyPrice </a>
-</div>
-<div class="row panel">
-    <div id="categories" class="col-xs-3">
-        @Html.Action("Menu", "Nav")
+    @Html.Partial("_Header")
+    <div class="row panel">
+        <div id="categories" class="col-xs-3">
+            @Html.Action("Menu", "Nav")
+        </div>
+        <div class="col-xs-8">
+            @RenderBody()
+        </div>
     </div>
-    <div class="col-xs-8">
-        @RenderBody()
-    </div>
-</div>
 </body>
 </html>
 

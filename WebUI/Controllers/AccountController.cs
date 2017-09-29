@@ -51,14 +51,14 @@ namespace WebUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (new CustomMembershipProvider().ValidateUser(viewModel.UserName, viewModel.Password))
+                    if (new CustomMembershipProvider().ValidateUser(viewModel.Email, viewModel.Password))
                     {
-                        if (new CustomRoleProvider().IsUserInRole(viewModel.UserName, "banned"))
+                        if (new CustomRoleProvider().IsUserInRole(viewModel.Email, "banned"))
                         {
                             return View("_BannedUser");
                         }
 
-                        FormsAuthentication.SetAuthCookie(viewModel.UserName, false);
+                        FormsAuthentication.SetAuthCookie(viewModel.Email, false);
 
                         if (Url.IsLocalUrl(returnUrl))
                             return Redirect(returnUrl);
@@ -73,7 +73,7 @@ namespace WebUI.Controllers
             }
 
 
-            public ActionResult LogOff()
+            public ActionResult LogOut()
             {
                 FormsAuthentication.SignOut();
 
@@ -117,7 +117,7 @@ namespace WebUI.Controllers
                 if (ModelState.IsValid)
                 {
                     var membershipUser = ((CustomMembershipProvider)Membership.Provider)
-                        .CreateUser(viewModel.Email, viewModel.Password, viewModel.Email);
+                        .CreateUser(viewModel.UserName, viewModel.Password, viewModel.Email);
 
                     if (membershipUser != null)
                     {

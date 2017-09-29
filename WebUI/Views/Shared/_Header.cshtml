@@ -1,0 +1,35 @@
+﻿<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <a class="navbar-brand" href="#"> TastyPrice </a>
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right text-center ">
+                    <li>
+                        @using (Ajax.BeginForm("Search", "Profile", new AjaxOptions { UpdateTargetId = "results" }))
+                        {
+                            <div class="form-group center-block" style="margin-top: 8px; margin-bottom: 5px;">
+                                @Html.TextBox("FirstName", null, new { @class = "form-control", placeholder = "Search" })
+                            </div>
+                        }
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle navbar-right" role="button" data-toggle="dropdown">
+                            @User.Identity.Name
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            @*TODO:menu*@
+                            <li role="presentation">@Html.ActionLink("My lots", "My", "Lot")</li>
+                            <li role="presentation">@Html.ActionLink("My bids", "Bid", "Lot")</li>
+                            <li role="presentation">@Html.ActionLink("My victories", "Victories", "Lot")</li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">@Html.ActionLink("Log Out", "LogOut", "Account")</li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        }
+    </div>
+</div>

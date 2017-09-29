@@ -27,16 +27,23 @@ namespace WebUI.Providers
 
         #region Implementations
 
-        public override bool ValidateUser(string username, string password)
+        public override bool ValidateUser(string email, string password)
         {
-            var user = UserRepository.GetUserByName(username);
+            var user = UserRepository.GetUserByEmail(email);
 
             return user != null && Crypto.VerifyHashedPassword(user.Password, password);
         }
 
         public MembershipUser CreateUser(string name, string password, string email)
         {
-            UserProfile userProfile = new UserProfile();
+            MembershipUser membershipUser = GetUser(email, false);
+
+            if (membershipUser != null)
+            {
+                return null;
+            }
+
+            UserProfile userProfile = new UserProfile() { RegistrationDate = DateTime.Now };
 
             User user = new User()
             {
@@ -44,23 +51,23 @@ namespace WebUI.Providers
                 Name = name,
                 Email = email,
                 Password = Crypto.HashPassword(password),
-                RoleId = UserRoleRepository.UserRoles.FirstOrDefault(r => r.Name == "User").Id
+                RoleId = UserRoleRepository.UserRoles.FirstOrDefault(r => r.Name == "user").Id
             };
 
             UserRepository.Create(user);
 
-            return GetUser(name, true);
+            return GetUser(email, true);
         }
 
-        public override MembershipUser GetUser(string name, bool userIsOnline)
+        public override MembershipUser GetUser(string email, bool userIsOnline)
         {
-            var user = UserRepository.GetUserByName(name);
+            var user = UserRepository.GetUserByEmail(email);
 
             if (user == null)
                 return null;
 
             var memberUser = new MembershipUser("CustomMembershipProvider",
-                user.Name, null, null, null, null,
+                user.Email, null, null, null, null,
                 false, false, DateTime.MinValue,
                 DateTime.MinValue, DateTime.MinValue,
                 DateTime.MinValue, DateTime.MinValue);
@@ -73,7 +80,8 @@ namespace WebUI.Providers
 
         #region NotImplemented
 
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion,
+        public override MembershipUser CreateUser(string username, string password, string email,
+            string passwordQuestion,
             string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
         {
             throw new NotImplementedException();
@@ -115,8 +123,6 @@ namespace WebUI.Providers
             throw new NotImplementedException();
         }
 
-
-
         public override string GetUserNameByEmail(string email)
         {
             throw new NotImplementedException();
@@ -147,17 +153,57 @@ namespace WebUI.Providers
             throw new NotImplementedException();
         }
 
-        public override bool EnablePasswordRetrieval { get; }
-        public override bool EnablePasswordReset { get; }
-        public override bool RequiresQuestionAndAnswer { get; }
+        public override bool EnablePasswordRetrieval
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override bool EnablePasswordReset
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override bool RequiresQuestionAndAnswer
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public override string ApplicationName { get; set; }
-        public override int MaxInvalidPasswordAttempts { get; }
-        public override int PasswordAttemptWindow { get; }
-        public override bool RequiresUniqueEmail { get; }
-        public override MembershipPasswordFormat PasswordFormat { get; }
-        public override int MinRequiredPasswordLength { get; }
-        public override int MinRequiredNonAlphanumericCharacters { get; }
-        public override string PasswordStrengthRegularExpression { get; }
+
+        public override int MaxInvalidPasswordAttempts
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override int PasswordAttemptWindow
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override bool RequiresUniqueEmail
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override MembershipPasswordFormat PasswordFormat
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override int MinRequiredPasswordLength
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override int MinRequiredNonAlphanumericCharacters
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override string PasswordStrengthRegularExpression
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         #endregion
     }

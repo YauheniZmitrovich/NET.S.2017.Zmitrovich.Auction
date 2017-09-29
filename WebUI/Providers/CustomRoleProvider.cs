@@ -25,9 +25,9 @@ namespace WebUI.Providers
 
         #region RoleProvider implementation
 
-        public override bool IsUserInRole(string userName, string roleName)
+        public override bool IsUserInRole(string email, string roleName)
         {
-            var user = UserRepository.GetUserByName(userName);
+            var user = UserRepository.GetUserByEmail(email);
 
             if (user == null)
                 return false;
@@ -37,11 +37,11 @@ namespace WebUI.Providers
             return user.RoleId == userRole?.Id;
         }
 
-        public override string[] GetRolesForUser(string userName)
+        public override string[] GetRolesForUser(string email)
         {
             var role = new string[] { };
 
-            var user = UserRepository.GetUserByName(userName);
+            var user = UserRepository.GetUserByEmail(email);
 
             if (user == null)
                 return role;
