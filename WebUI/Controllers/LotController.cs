@@ -49,12 +49,26 @@ namespace WebUI.Controllers
         {
             var photo = _repository.Lots.FirstOrDefault(p => p.Id == id)?.Photos.FirstOrDefault();
 
-            if(photo!=null)
+            if (photo != null)
                 return File(photo.Content, "image/png");
 
             var path = Server.MapPath("~/Content/DefaultImages/Lot.png");
 
             return File(path, "image/png");
+        }
+
+        public ViewResult Profile(long id)
+        {
+            Lot lot = _repository.Lots.FirstOrDefault(p => p.Id == id);
+
+            return View(lot);
+        }
+
+        [Authorize]
+        public ActionResult Buy(int id)
+        {
+            Lot lot = _repository.Lots.FirstOrDefault(p => p.Id == id);
+            return View(lot);
         }
     }
 }

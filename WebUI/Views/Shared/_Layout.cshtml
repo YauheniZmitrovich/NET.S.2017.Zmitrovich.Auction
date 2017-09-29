@@ -12,14 +12,20 @@
 </head>
 <body>
     @Html.Partial("_Header")
-    <div class="row panel">
-        <div id="categories" class="col-xs-3">
-            @Html.Action("Menu", "Nav")
-        </div>
-        <div class="col-xs-8">
-            @RenderBody()
-        </div>
+<div class="row panel">
+    <div id="categories" class="col-xs-3">
+        @Html.Action("Menu", "Nav")
     </div>
+    <div class="col-xs-8">
+        @RenderBody()
+    </div>
+</div>
+<div style="text-align: center;">
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year – Zmitrovich Evgeny</p>
+    </footer>
+</div>
 </body>
 </html>
 

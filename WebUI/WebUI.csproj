@@ -223,6 +223,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_BannedUser.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Lot\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

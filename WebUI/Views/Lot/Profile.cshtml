@@ -1,0 +1,102 @@
+﻿@model Domain.Entities.Lot
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h4 id="main_title">@Model.Title</h4>
+    <hr />
+
+    <table>
+        <tr>
+            <th>Current bid:</th>
+            <td>
+                @if (Model.Bids != null)
+                {
+                    <span class="pull-right label label-primary">@Model.CurrentPrice.ToString("c")</span>
+                }
+                else
+                {
+                    @:No bids yet<br />
+                }
+                @using (Html.BeginForm("ShiftLot", "Lot", FormMethod.Post))
+                    {
+                        <input type="text" value="@Model.Id" name="Id" style="display:none" />
+                            <input class="bids" type="number" name="Bid" min="0" required />
+                            <input class="lotname3" type="submit" value="Ставка" />
+                    }
+
+    <p>@Html.ActionLink("Buy", "Buy", "Lot", new { Model.Id })</p>
+    @*new { @class = "lotname3", style = "padding: 5px 10px 9px 10px" })
+*@
+
+
+<div>
+    <h4 id="main_title">
+        @Model.Title
+        @if (Model.GoldPrice != null)
+            {
+            <input type="button" value="Buy" class="pull-right btn btn-success"
+                   style="margin-right: 20px;padding-right: 29px;padding-left: 29px;"
+                   onclick="location.href = '<%: @Url.Action("Buy", "Lot") %>'" />
+        }
+        <input type="button" value="Bid on" class="pull-right btn btn-primary"
+               style="margin-right: 20px;padding-right: 20px;padding-left: 20px;"
+               onclick="location.href = '<%: @Url.Action("BidOn", "Lot") %>'" />
+    </h4>
+    <hr />
+</div>
+
+<div class="well">
+    <div class="div101">
+        @if (Model.Photos != null)
+        {
+            <img width="200" height=200 src="@Url.Action("GetImage", "Lot", new {Model.Id})" />
+        }
+    </div>
+
+    <div class="div102">
+        <span class="lead"> @Model.Description </span>
+    </div>
+
+</div>
+
+<div>
+    <h4>
+        <br />
+        <span class="pull-left label label-info">
+            From @Model.UploadDate.Day.@Model.UploadDate.Month.@Model.UploadDate.Year
+        </span>
+    </h4>
+
+    <h4>
+        @if (Model.Bids != null)
+        {
+            <span class="pull-right label label-primary">
+                Current bid: @Model.CurrentPrice.ToString("c")
+            </span>
+        }
+        else
+        {
+            <span class="pull-right label label-primary">No bids yet</span>
+        }
+    </h4><br />
+
+    <h4>
+        <span class="pull-left label label-warning">
+            Till @Model.EndOfTranding.Day.@Model.EndOfTranding.Month.@Model.EndOfTranding.Year
+        </span>
+    </h4>
+
+    <h4>
+        @if (Model.GoldPrice != null)
+        {
+            <span class="pull-right label label-default">
+                Gold price: @Model.GoldPrice.Value.ToString("c")
+            </span>@*TODO:if NULL*@
+        }
+    </h4><br />
+
+
+
+</div>
