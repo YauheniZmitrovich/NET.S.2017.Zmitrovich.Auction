@@ -34,15 +34,19 @@
 <div>
     <h4 id="main_title">
         @Model.Title
-        @if (Model.GoldPrice != null)
+        @if (Model.IsEnded == false)
+        {
+            if (Model.GoldPrice != null)
             {
-            <input type="button" value="Buy" class="pull-right btn btn-success"
-                   style="margin-right: 20px;padding-right: 29px;padding-left: 29px;"
-                   onclick="location.href = '<%: @Url.Action("Buy", "Lot") %>'" />
+                <input type="button" value="Buy" class="pull-right btn btn-success"
+                       style="margin-right: 20px;padding-right: 29px;padding-left: 29px;"
+                       onclick="location.href = '<%: @Url.Action("Buy", "Lot",new {Model.Id}) %>'" />
+            }
+
+            <input type="button" value="Bid on" class="pull-right btn btn-primary"
+                   style="margin-right: 20px;padding-right: 20px;padding-left: 20px;"
+                   onclick="location.href = '<%: @Url.Action("BidOn", "Lot") %>'" />
         }
-        <input type="button" value="Bid on" class="pull-right btn btn-primary"
-               style="margin-right: 20px;padding-right: 20px;padding-left: 20px;"
-               onclick="location.href = '<%: @Url.Action("BidOn", "Lot") %>'" />
     </h4>
     <hr />
 </div>

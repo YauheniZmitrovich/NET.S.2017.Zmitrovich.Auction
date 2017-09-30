@@ -7,12 +7,10 @@ using Domain.Entities;
 
 namespace Domain.Abstract
 {
-    public interface ILotRepository
+    public interface IBidRepository
     {
-        IQueryable<Lot> Lots { get; }
+        IQueryable<Bid> Bids { get; }
 
-        void IncViewCount(long id);
-
-        void SaveLot(Lot lot);
+        void SaveBid(Bid bid);
     }
 }

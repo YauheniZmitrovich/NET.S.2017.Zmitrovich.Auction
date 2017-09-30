@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebUI.Models
 {
-    public class LotPageInfo//TODO:Replace with ajax
+    public class LotPageInfo
     {
         public int TotalItems { get; set; }
 

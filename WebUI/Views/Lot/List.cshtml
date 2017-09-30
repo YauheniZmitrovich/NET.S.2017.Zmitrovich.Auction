@@ -6,7 +6,10 @@
 
 @foreach (var p in @Model.Lots)
 {
- @Html.Partial("LotSummary",p)
+    if (p.IsEnded == false)
+    {
+        @Html.Partial("LotSummary", p)
+    }
 }
 
 <div class="btn-group pull-right">

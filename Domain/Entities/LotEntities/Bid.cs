@@ -18,8 +18,6 @@ namespace Domain.Entities
 
         public System.DateTime DateTime { get; set; }
 
-        public bool IsWinsNow { get; set; }
-
 
         [ForeignKey(nameof(Lot))]
         public long LotId { get; set; }

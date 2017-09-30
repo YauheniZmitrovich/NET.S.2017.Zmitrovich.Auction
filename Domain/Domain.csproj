@@ -68,12 +68,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBidRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\ILotRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
     <Compile Include="Abstract\IUserRoleRepository.cs" />
     <Compile Include="Concrete\CustomEFDBInitializer.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\Repositories\EFBidRepository.cs" />
     <Compile Include="Concrete\Repositories\EFUserRepository.cs" />
     <Compile Include="Concrete\Repositories\EFCategoryRepository.cs" />
     <Compile Include="Concrete\Repositories\EFLotRepository.cs" />
