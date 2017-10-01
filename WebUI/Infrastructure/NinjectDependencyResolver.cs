@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Abstract;
+using Domain.Concrete;
 using Domain.Concrete.Repositories;
 using Ninject;
 
@@ -12,6 +13,8 @@ namespace WebUI.Infrastructure
     public class NinjectDependencyResolver : IDependencyResolver
     {
         private readonly IKernel _kernel;
+
+        private EFDbContext _context = new EFDbContext();
 
         public NinjectDependencyResolver(IKernel kernelParam)
         {
@@ -40,6 +43,8 @@ namespace WebUI.Infrastructure
             _kernel.Bind<IUserRepository>().To<EFUserRepository>();
 
             _kernel.Bind<IUserRoleRepository>().To<EFUserRoleRepository>();
+
+            _kernel.Bind<EFDbContext>().To<EFDbContext>().InSingletonScope(); 
         }
     }
 }

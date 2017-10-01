@@ -1,0 +1,17 @@
+﻿@using WebUI.Html_helpers
+@model WebUI.Models.LotsListViewModel
+@{
+    ViewBag.Title = "My Lots";
+}
+<h4 id="main_title">My lots</h4>
+<hr />
+
+@foreach (var p in @Model.Lots)
+{
+    @Html.Partial("_LotSummary", p)
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("My",
+        new { page = x}))
+</div>

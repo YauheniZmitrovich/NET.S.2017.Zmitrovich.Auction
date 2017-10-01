@@ -8,8 +8,12 @@ namespace Domain.Concrete.Repositories
 {
     public class EFUserRepository : IUserRepository
     {
-        private readonly EFDbContext _context = new EFDbContext();
+        private readonly EFDbContext _context;
 
+        public EFUserRepository(EFDbContext context)
+        {
+            _context = context;
+        }
 
         public IQueryable<User> Users => _context.Users;
 
@@ -60,22 +64,15 @@ namespace Domain.Concrete.Repositories
         }
 
 
-        public User GetUserByEmail(string email)
-        {
-            var user = (from u in _context.Users
-                        where u.Email == email
-                        select u).FirstOrDefault();
-            return user;
-        }
+        public User GetUserByEmail(string email) => (from u in _context.Users
+                                                     where u.Email == email
+                                                     select u).FirstOrDefault();
 
-        public User GetUserByName(string name)
-        {
-            if (name == null)
-                return null;
+        public User GetUserByName(string name) => _context.Users.FirstOrDefault(u => u.Name == name);
 
-            var user = _context.Users.FirstOrDefault(u => u.Name == name);
+        public long GetUserIdByEmail(string email) => (from u in _context.Users
+                                                       where u.Email == email
+                                                       select u.Id).FirstOrDefault();
 
-            return user;
-        }
     }
 }

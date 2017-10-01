@@ -11,8 +11,12 @@ namespace Domain.Concrete.Repositories
 {
     public class EFUserRoleRepository : IUserRoleRepository
     {
-        private readonly EFDbContext _context = new EFDbContext();
+        private readonly EFDbContext _context;
 
+        public EFUserRoleRepository(EFDbContext context)
+        {
+            _context = context;
+        }
 
         public IQueryable<UserRole> UserRoles => _context.UserRoles;
 

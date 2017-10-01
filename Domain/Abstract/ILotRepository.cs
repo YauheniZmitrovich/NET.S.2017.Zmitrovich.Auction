@@ -14,5 +14,7 @@ namespace Domain.Abstract
         void IncViewCount(long id);
 
         void SaveLot(Lot lot);
+
+        Lot GetLotById(long id);
     }
 }

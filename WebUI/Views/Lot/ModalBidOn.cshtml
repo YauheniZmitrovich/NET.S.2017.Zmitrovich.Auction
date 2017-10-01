@@ -1,0 +1,32 @@
+﻿@using WebUI.Models
+@model Domain.Entities.Lot
+
+<a href="#myModalBox" class="pull-right btn btn-primary"
+   style="margin-right: 20px; padding-right: 20px; padding-left: 20px;"
+   data-toggle="modal">Bid on</a>
+
+<div id="myModalBox" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Bid on</h4>
+            </div>
+            <div class="modal-body">
+                <span class="pull-left label label-primary">
+                    Current bid: @Model.CurrentPrice.ToString("c")
+                </span>
+                @if (Model.GoldPrice != null)
+                {
+                    <span class="pull-right label label-default">
+                        Gold price: @Model.GoldPrice.Value.ToString("c")
+                    </span>@*TODO:if NULL*@
+                }
+                <br><hr>
+
+                @Html.Partial("_BidOnForm", new BidOnViewModel
+           { LotId = Model.Id, CurrentPrice = Model.CurrentPrice,GoldPrice = Model.GoldPrice})
+            </div>
+        </div>
+    </div>
+</div>

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -171,6 +172,7 @@
     <Compile Include="Infrastructure\CaptchaImage.cs" />
     <Compile Include="Infrastructure\DataRepresentative.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\BidOnViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
     <Compile Include="Models\LotPageInfo.cs" />
     <Compile Include="Models\LotsListViewModel.cs" />
@@ -217,13 +219,16 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Lot\List.cshtml" />
-    <Content Include="Views\Lot\LotSummary.cshtml" />
+    <Content Include="Views\Lot\_LotSummary.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_BannedUser.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Lot\Profile.cshtml" />
+    <Content Include="Views\Lot\My.cshtml" />
+    <Content Include="Views\Lot\ModalBidOn.cshtml" />
+    <Content Include="Views\Lot\_BidOnForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

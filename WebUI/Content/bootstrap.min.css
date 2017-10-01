@@ -31,6 +31,19 @@
     margin-left: 30%;
 }
 
+.div103 {
+    width: 70%;
+    min-height: 50px;
+    float: left;
+}
+
+.div104 {
+    width: 30%;
+    min-height: 50px;
+    /*margin-left: 70%;*/
+    float: right;
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
     display: block
 }
@@ -400,7 +413,7 @@ p {
 
 @media(min-width:768px) {
     .lead {
-        font-size: 21px
+        font-size: 24px
     }
 }
 
@@ -491,7 +504,7 @@ h5, .h5 {
 }
 
 h6, .h6 {
-    font-size: 12px
+    font-size: 27px
 }
 
 h1 small, .h1 small {

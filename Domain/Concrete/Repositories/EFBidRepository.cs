@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Abstract;
@@ -10,9 +12,14 @@ namespace Domain.Concrete.Repositories
 {
     public class EFBidRepository:IBidRepository
     {
-        private readonly EFDbContext _context = new EFDbContext();
+        private readonly EFDbContext _context;
 
         public IQueryable<Bid> Bids => _context.Bids;
+
+        public EFBidRepository(EFDbContext context)
+        {
+            _context = context;
+        }
 
         public void SaveBid(Bid bid)
         {
@@ -31,10 +38,18 @@ namespace Domain.Concrete.Repositories
                     dbEntry.DateTime = bid.DateTime;
                     dbEntry.LotId = bid.LotId;
                     dbEntry.UserId = bid.UserId;
+                    dbEntry.User = bid.User;
+                    dbEntry.Lot = bid.Lot;
                 }
             }
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception exception)
+            {
 
-            _context.SaveChanges();
+            }
         }
 
     }

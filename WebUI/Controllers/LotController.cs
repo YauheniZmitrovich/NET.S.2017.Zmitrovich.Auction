@@ -14,19 +14,32 @@ namespace WebUI.Controllers
 {
     public class LotController : Controller
     {
+        #region Repositories
+
         private readonly ILotRepository _lotRepository;
 
         private readonly IBidRepository _bidRepository;
 
+        private readonly IUserRepository _userRepository;
 
-        public int PageSize { get; set; } = 4;
+        #endregion
 
-        public LotController(ILotRepository lotRepository, IBidRepository bidRepository)
+
+        #region Constructor and property
+
+        public int PageSize { get; } = 4;
+
+        public LotController(ILotRepository lotRepository, IBidRepository bidRepository, IUserRepository userRepository)
         {
             this._lotRepository = lotRepository;
 
             this._bidRepository = bidRepository;
+
+            this._userRepository = userRepository;
         }
+
+
+        #endregion
 
         public ViewResult List(string category, int page = 1)
         {
@@ -51,6 +64,31 @@ namespace WebUI.Controllers
             return View(model);
         }
 
+        [Authorize]
+        [HttpGet]
+        public ActionResult My(int page = 1)
+        {
+            long userId = _userRepository.GetUserIdByEmail(User.Identity.Name);
+
+            LotsListViewModel model = new LotsListViewModel
+            {
+                Lots = _lotRepository.Lots
+                    .Where(p => p.UserId == userId)
+                    .OrderBy(lot => lot.Id)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+                PagingInfo = new LotPageInfo()
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = _lotRepository.Lots
+                        .Count(p => p.UserId == userId)
+                }
+            };
+
+            return View(model);
+        }
+
         public FileResult GetImage(int id)
         {
             var photo = _lotRepository.Lots.FirstOrDefault(p => p.Id == id)?.Photos.FirstOrDefault();
@@ -68,6 +106,8 @@ namespace WebUI.Controllers
             Lot lot = _lotRepository.Lots.FirstOrDefault(p => p.Id == id);
 
             _lotRepository.IncViewCount(id);
+
+            ViewBag.sessionUserId = _userRepository.GetUserIdByEmail(User.Identity.Name);
 
             return View(lot);
         }
@@ -105,6 +145,49 @@ namespace WebUI.Controllers
             _lotRepository.SaveLot(lot);
 
             return RedirectToAction("Profile", new { Id = id });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "user")]
+        public ActionResult BidOn(BidOnViewModel mdl)
+        {
+            if (mdl.Cost < mdl.CurrentPrice || (mdl.GoldPrice != null && mdl.Cost > mdl.GoldPrice))
+            {
+                ModelState.AddModelError("Cost", "Incorrect input");
+            }
+
+            if (ModelState.IsValid)
+            {
+
+                Lot lot = _lotRepository.Lots.FirstOrDefault(p => p.Id == mdl.LotId);
+
+                DateTime dt = DateTime.Now;
+
+                long userId = _userRepository.GetUserIdByEmail(User.Identity.Name);
+
+
+                Bid bid = new Bid()
+                {
+                    Cost = mdl.Cost,
+                    UserId = userId,
+                    User = _userRepository.GetUserByEmail(User.Identity.Name),
+                    DateTime = dt,
+                    LotId = mdl.LotId,
+                    Lot = _lotRepository.GetLotById(userId)
+                };
+
+                lot.CurrentPrice = mdl.Cost;
+
+                _bidRepository.SaveBid(bid);
+
+                _lotRepository.SaveLot(lot);
+
+                ViewBag.IsValid = true;
+            }
+
+            ViewBag.IsValid = false;
+
+            return RedirectToAction("Profile", new { Id = mdl.LotId });
         }
     }
 }

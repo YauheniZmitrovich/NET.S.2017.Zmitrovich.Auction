@@ -40,6 +40,6 @@ namespace WebUI.Models
         [DataType(DataType.Date)]
         public DateTime AddedDate { get; set; }
 
-        public string AvatarPath { get; set; }
+        public byte[] Avatar { get; set; }
     }
 }

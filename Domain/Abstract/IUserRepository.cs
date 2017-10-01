@@ -22,5 +22,7 @@ namespace Domain.Abstract
         User GetUserByEmail(string email);
 
         User GetUserByName(string userName);
+
+        long GetUserIdByEmail(string email);
     }
 }   

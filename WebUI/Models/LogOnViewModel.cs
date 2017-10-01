@@ -10,7 +10,7 @@ namespace WebUI.Models
     {
         [Required(ErrorMessage = "The field can not be empty!")]
         [Display(Name = "E-mail:")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",//TODO:Understand
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}",
             ErrorMessage = "Incorrect e-mail.")]
         public string Email { get; set; }
 

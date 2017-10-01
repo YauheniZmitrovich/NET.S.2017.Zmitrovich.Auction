@@ -10,7 +10,12 @@ namespace Domain.Concrete.Repositories
 {
     public class EFCategoryRepository:ICategoryRepository
     {
-        private readonly EFDbContext _context = new EFDbContext();
+        private readonly EFDbContext _context;
+
+        public EFCategoryRepository(EFDbContext context)
+        {
+            _context = context;
+        }
 
         public IQueryable<Category> Categories => _context.Categories;
     }

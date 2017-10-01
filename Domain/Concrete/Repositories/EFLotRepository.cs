@@ -11,7 +11,12 @@ namespace Domain.Concrete.Repositories
 {
     public class EFLotRepository : ILotRepository
     {
-        private readonly EFDbContext _context = new EFDbContext();
+        private readonly EFDbContext _context;
+
+        public EFLotRepository(EFDbContext context)
+        {
+            _context = context;
+        }
 
         public IQueryable<Lot> Lots => _context.Lots;
 
@@ -53,5 +58,9 @@ namespace Domain.Concrete.Repositories
 
             _context.SaveChanges(); 
         }
+
+        public Lot GetLotById(long id) => (from u in _context.Lots
+            where u.Id == id
+            select u).FirstOrDefault();
     }
 }

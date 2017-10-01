@@ -1,55 +1,37 @@
-﻿@model Domain.Entities.Lot
+﻿@using WebUI.Models
+@model Domain.Entities.Lot
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h4 id="main_title">@Model.Title</h4>
-    <hr />
+<h4 id="main_title">
 
-    <table>
-        <tr>
-            <th>Current bid:</th>
-            <td>
-                @if (Model.Bids != null)
-                {
-                    <span class="pull-right label label-primary">@Model.CurrentPrice.ToString("c")</span>
-                }
-                else
-                {
-                    @:No bids yet<br />
-                }
-                @using (Html.BeginForm("ShiftLot", "Lot", FormMethod.Post))
-                    {
-                        <input type="text" value="@Model.Id" name="Id" style="display:none" />
-                            <input class="bids" type="number" name="Bid" min="0" required />
-                            <input class="lotname3" type="submit" value="Ставка" />
-                    }
+    @Model.Title
 
-    <p>@Html.ActionLink("Buy", "Buy", "Lot", new { Model.Id })</p>
-    @*new { @class = "lotname3", style = "padding: 5px 10px 9px 10px" })
-*@
-
-
-<div>
-    <h4 id="main_title">
-        @Model.Title
-        @if (Model.IsEnded == false)
+    @if (Model.IsEnded == false && Model.UserId != ViewBag.sessionUserId)
+    {
+        if (Model.GoldPrice != null)
         {
-            if (Model.GoldPrice != null)
-            {
-                <input type="button" value="Buy" class="pull-right btn btn-success"
-                       style="margin-right: 20px;padding-right: 29px;padding-left: 29px;"
-                       onclick="location.href = '<%: @Url.Action("Buy", "Lot",new {Model.Id}) %>'" />
-            }
-
-            <input type="button" value="Bid on" class="pull-right btn btn-primary"
-                   style="margin-right: 20px;padding-right: 20px;padding-left: 20px;"
-                   onclick="location.href = '<%: @Url.Action("BidOn", "Lot") %>'" />
+            <input type="button" value="Buy" class="pull-right btn btn-success"
+                   style="margin-right: 20px; padding-right: 29px; padding-left: 29px;"
+                   onclick="location.href = '<%: @Url.Action("Buy", "Lot", new {Model.Id}) %>'" />
         }
-    </h4>
-    <hr />
-</div>
+
+
+        @Html.Partial("ModalBidOn", Model);
+    }
+    else
+    {
+        <input type="button" value="My lots" class="pull-right btn btn-info"
+               style="margin-right: 20px; padding-right: 29px; padding-left: 29px;"
+               onclick="location.href = '@Url.Action("My")'" />
+    }
+</h4>
+
+<hr />
+
+
 
 <div class="well">
     <div class="div101">
@@ -62,12 +44,10 @@
     <div class="div102">
         <span class="lead"> @Model.Description </span>
     </div>
-
 </div>
 
 <div>
     <h4>
-        <br />
         <span class="pull-left label label-info">
             From @Model.UploadDate.Day.@Model.UploadDate.Month.@Model.UploadDate.Year
         </span>
@@ -101,6 +81,9 @@
         }
     </h4><br />
 
-
+    @if (ViewBag.IsValid == false)
+    { 
+        @Html.Partial("ModalBidOn", Model);
+    }
 
 </div>
