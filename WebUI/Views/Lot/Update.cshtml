@@ -1,0 +1,35 @@
+﻿@model WebUI.Models.LotModel
+
+@{
+    ViewBag.Title = "Update";
+}
+
+@using (Html.BeginForm("Update", "Lot", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Edit lot</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, Model.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { rows = 6, @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Description, null, new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-left: 255px">
+            <input type="submit" class="btn btn-success" value="Save" />
+        </div>
+    </div>
+
+}

@@ -10,5 +10,7 @@ namespace Domain.Abstract
     public interface ICategoryRepository
     {
         IQueryable<Category> Categories { get; }
+
+        long GetCategoryIdByName(string name);
     }
 }

@@ -173,7 +173,9 @@
     <Compile Include="Infrastructure\DataRepresentative.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\BidOnViewModel.cs" />
+    <Compile Include="Models\BidsListViewModel.cs" />
     <Compile Include="Models\LogOnViewModel.cs" />
+    <Compile Include="Models\LotModel.cs" />
     <Compile Include="Models\LotPageInfo.cs" />
     <Compile Include="Models\LotsListViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -229,6 +231,11 @@
     <Content Include="Views\Lot\My.cshtml" />
     <Content Include="Views\Lot\ModalBidOn.cshtml" />
     <Content Include="Views\Lot\_BidOnForm.cshtml" />
+    <Content Include="Views\Lot\ModalBuyLot.cshtml" />
+    <Content Include="Views\Lot\MyBids.cshtml" />
+    <Content Include="Views\Lot\MyWins.cshtml" />
+    <Content Include="Views\Lot\Create.cshtml" />
+    <Content Include="Views\Lot\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

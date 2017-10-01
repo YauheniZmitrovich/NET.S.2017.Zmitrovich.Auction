@@ -9,23 +9,20 @@
 
     @Model.Title
 
-    @if (Model.IsEnded == false && Model.UserId != ViewBag.sessionUserId)
+    @if (Model.UserId == ViewBag.sessionUserId)
+    {
+        <input type="button" value="Edit" class="pull-right btn btn-info"
+               style="margin-right: 20px; padding-right: 29px; padding-left: 29px;"
+               onclick="location.href = '@Url.Action("Update",new{Model.Id})'" />
+    }
+    else if (Model.IsEnded == false)
     {
         if (Model.GoldPrice != null)
         {
-            <input type="button" value="Buy" class="pull-right btn btn-success"
-                   style="margin-right: 20px; padding-right: 29px; padding-left: 29px;"
-                   onclick="location.href = '<%: @Url.Action("Buy", "Lot", new {Model.Id}) %>'" />
+            @Html.Partial("ModalBuyLot", Model);
         }
 
-
         @Html.Partial("ModalBidOn", Model);
-    }
-    else
-    {
-        <input type="button" value="My lots" class="pull-right btn btn-info"
-               style="margin-right: 20px; padding-right: 29px; padding-left: 29px;"
-               onclick="location.href = '@Url.Action("My")'" />
     }
 </h4>
 
@@ -35,10 +32,7 @@
 
 <div class="well">
     <div class="div101">
-        @if (Model.Photos != null)
-        {
-            <img width="200" height=200 src="@Url.Action("GetImage", "Lot", new {Model.Id})" />
-        }
+        <img width="200" height=200 src="@Url.Action("GetImage", "Lot", new {Model.Id})" />
     </div>
 
     <div class="div102">
@@ -82,7 +76,7 @@
     </h4><br />
 
     @if (ViewBag.IsValid == false)
-    { 
+    {
         @Html.Partial("ModalBidOn", Model);
     }
 

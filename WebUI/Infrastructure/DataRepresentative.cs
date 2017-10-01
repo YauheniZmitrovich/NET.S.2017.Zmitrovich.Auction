@@ -13,7 +13,6 @@ namespace WebUI.Infrastructure
         public static string HandleLotTitleForSummary(string tle)
             => CutStringForSummary(tle, 30);
         
-
         private static string CutStringForSummary(string s, int defaultLength)
         {
             if (s.Length < defaultLength)

@@ -1,0 +1,20 @@
+﻿@using WebUI.Html_helpers
+@model WebUI.Models.BidsListViewModel
+
+@{
+    ViewBag.Title = "MyBids";
+}
+
+<h4 id="main_title">My lots</h4>
+<hr />
+
+@foreach (var p in @Model.Lots)
+{
+    @*<h4>Your bids: @{ Model.Bids.FirstOrDefault(b => b.LotId == p.Id)?.Cost.ToString();}</h4>*@
+    @Html.Partial("_LotSummary", p)
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("MyBids",
+        new { page = x }))
+</div>

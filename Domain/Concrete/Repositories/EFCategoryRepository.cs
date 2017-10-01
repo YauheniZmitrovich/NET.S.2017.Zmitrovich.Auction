@@ -8,7 +8,7 @@ using Domain.Entities;
 
 namespace Domain.Concrete.Repositories
 {
-    public class EFCategoryRepository:ICategoryRepository
+    public class EFCategoryRepository : ICategoryRepository
     {
         private readonly EFDbContext _context;
 
@@ -18,5 +18,9 @@ namespace Domain.Concrete.Repositories
         }
 
         public IQueryable<Category> Categories => _context.Categories;
+
+        public long GetCategoryIdByName(string name) => (from u in _context.Categories
+                                                           where u.Name == name
+                                                           select u.Id).FirstOrDefault();
     }
 }

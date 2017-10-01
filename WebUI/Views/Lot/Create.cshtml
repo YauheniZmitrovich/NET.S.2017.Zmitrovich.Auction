@@ -1,0 +1,72 @@
+﻿@model WebUI.Models.LotModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Create", "Lot", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Register</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Description, new { rows = 6, @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CurrentPrice, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CurrentPrice, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CurrentPrice, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.GoldPrice, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.GoldPrice, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.GoldPrice, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Category, ViewBag.Category as SelectList, new { @class = "col-md-2 btn btn-default" })
+            @Html.ValidationMessageFor(m => m.Category, null, new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Image"  />
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin-left: 255px">
+            <input type="submit" class="btn btn-success" value="Register" />
+        </div>
+    </div>
+
+}
+@*@using (Html.BeginForm("UploadImage", "Lot", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<input type="file" name="file" accept="image/x-png, image/gif, image/jpeg">
+<input type="submit" value="Save image" class="btn btn-default">
+}*@
