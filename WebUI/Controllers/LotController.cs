@@ -75,6 +75,7 @@ namespace WebUI.Controllers
         #region Create
 
         [HttpGet]
+        [Authorize(Roles = "user")]
         public ActionResult Create()
         {
             var categoryList = _categoryRepository.Categories;
@@ -88,6 +89,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "user")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LotModel model)
         {
@@ -111,7 +113,7 @@ namespace WebUI.Controllers
                 _lotRepository.SaveLot(lot);
             }
 
-            return RedirectToAction("Index", "Home"); //TODO:right way
+            return RedirectToAction("List", "Lot"); 
         }
 
         #endregion
@@ -124,7 +126,7 @@ namespace WebUI.Controllers
         public ActionResult Update(long id)
         {
             var lot = _lotRepository.GetLotById(id);
-            
+
             TempData["id"] = id;
 
             var model = new LotModel
@@ -157,6 +159,8 @@ namespace WebUI.Controllers
 
         #endregion
 
+
+        #region My
 
         [HttpGet]
         [Authorize(Roles = "user")]
@@ -240,7 +244,10 @@ namespace WebUI.Controllers
 
             return View(model);
         }
+        #endregion
 
+
+        #region Image
 
         public FileResult GetImage(int id)
         {
@@ -280,6 +287,11 @@ namespace WebUI.Controllers
             return RedirectToAction("Profile", "Lot", new { lotId });
         }
 
+        #endregion
+
+
+        #region Profile
+
         public ViewResult Profile(long id)
         {
             Lot lot = _lotRepository.Lots.FirstOrDefault(p => p.Id == id);
@@ -291,6 +303,10 @@ namespace WebUI.Controllers
             return View(lot);
         }
 
+        #endregion
+
+
+        #region Bid On and buy
 
         [HttpPost]
         [Authorize(Roles = "user")]
@@ -368,39 +384,13 @@ namespace WebUI.Controllers
 
                 _lotRepository.SaveLot(lot);
 
-                return RedirectToAction("Profile", "Lot", new { Id = lot.Id });//Todo:reght way
+                return RedirectToAction("Profile", "Lot", new { Id = lot.Id });
             }
 
-            return RedirectToAction("Index", "Home");//Todo:reght way
+            return RedirectToAction("List", "Lot");
         }
 
-        //[Authorize(Roles = "user")]
-        //public ActionResult Buy(long id)
-        //{
-        //    Lot lot = _lotRepository.Lots.FirstOrDefault(p => p.Id == id);
-
-        //    DateTime dt = DateTime.Now;
-
-        //    Bid bid = new Bid()
-        //    {
-        //        Cost = lot.GoldPrice.Value,
-        //        UserId = (long)Membership.GetUser().ProviderUserKey,
-        //        DateTime = dt,
-        //        LotId = id
-        //    };
-
-        //    lot.IsEnded = true;
-
-        //    lot.EndOfTranding = dt;
-
-        //    lot.CurrentPrice = lot.GoldPrice.Value;
-
-        //    _bidRepository.SaveBid(bid);
-
-        //    _lotRepository.SaveLot(lot);
-
-        //    return RedirectToAction("Profile", new { Id = id });
-        //}
+        #endregion
 
         #endregion
     }

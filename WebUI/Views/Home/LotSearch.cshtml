@@ -1,0 +1,18 @@
+﻿@using System.Web.Mvc.Html
+@model IEnumerable<Domain.Entities.Lot>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="searchresults">
+    <h3>Search results</h3>
+    <hr />
+    <ul>
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_LotSummary", item)
+        }
+    </ul>
+</div>

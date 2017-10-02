@@ -171,6 +171,7 @@
     <Compile Include="Html helpers\LotPagingHelper.cs" />
     <Compile Include="Infrastructure\CaptchaImage.cs" />
     <Compile Include="Infrastructure\DataRepresentative.cs" />
+    <Compile Include="Infrastructure\HandleAllErrorAttribute.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\BidOnViewModel.cs" />
     <Compile Include="Models\BidsListViewModel.cs" />
@@ -221,7 +222,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Lot\List.cshtml" />
-    <Content Include="Views\Lot\_LotSummary.cshtml" />
+    <Content Include="Views\Shared\_LotSummary.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -236,6 +237,7 @@
     <Content Include="Views\Lot\MyWins.cshtml" />
     <Content Include="Views\Lot\Create.cshtml" />
     <Content Include="Views\Lot\Update.cshtml" />
+    <Content Include="Views\Home\LotSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

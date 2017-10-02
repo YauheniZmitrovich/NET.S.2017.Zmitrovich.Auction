@@ -8,7 +8,7 @@ using WebUI.Models;
 
 namespace WebUI.Html_helpers
 {
-    public static class PagingHelpers //TODO: Replace with ajax
+    public static class PagingHelpers
     {
         public static MvcHtmlString PageLinks(this HtmlHelper html,
             LotPageInfo pagingInfo,

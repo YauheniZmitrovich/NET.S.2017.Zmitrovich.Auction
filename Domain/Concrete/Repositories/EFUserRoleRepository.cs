@@ -30,10 +30,6 @@ namespace Domain.Concrete.Repositories
             return true;
         }
 
-        public bool Update(UserRole e)//TODO:Implement and correct the same in UserRepository
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Remove(long e)
         {

@@ -36,7 +36,7 @@ namespace WebUI.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    return RedirectToAction("Index", "Home"); //TODO:RIGHT WAY
+                    return RedirectToAction("List", "Lot"); 
                 }
 
                 ViewBag.ReturnUrl = returnUrl;
@@ -63,7 +63,7 @@ namespace WebUI.Controllers
                         if (Url.IsLocalUrl(returnUrl))
                             return Redirect(returnUrl);
 
-                        return RedirectToAction("Index", "Home");//TODO:right way
+                        return RedirectToAction("List", "Lot");
                     }
                 }
 
@@ -87,7 +87,7 @@ namespace WebUI.Controllers
             {
                 if (User.Identity.IsAuthenticated)
                 {
-                    return RedirectToAction("Index", "Home");//TODO:right way
+                    return RedirectToAction("List", "Lot");
                 }
 
                 return View();
@@ -123,7 +123,7 @@ namespace WebUI.Controllers
                     {
                         FormsAuthentication.SetAuthCookie(viewModel.Email, false);
 
-                        return RedirectToAction("Index", "Home");//TODO:right way
+                        return RedirectToAction("List", "Lot");
                     }
 
                     ModelState.AddModelError("", "Error registration.");

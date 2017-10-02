@@ -3,30 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Domain.Abstract;
 
 namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILotRepository _lotRepository;
+
+        public HomeController(ILotRepository lotRepository)
+        {
+            _lotRepository = lotRepository;
+        }
+
         public ActionResult Index()
         {
-            RedirectToAction("List", "Lot");
-
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult LotSearch(string name)
         {
-            ViewBag.Message = "Your application description page.";
+            var lots = _lotRepository.Lots.Where(a => a.Title.Contains(name)).ToList();
 
-            return View();
-        }
+            if (lots.Count <= 0)
+            {
+                return HttpNotFound();
+            }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return PartialView("LotSearch",lots);
         }
     }
 }
